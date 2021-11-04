@@ -1,3 +1,7 @@
+# The algorithm is based on the research of ForgER, see below:
+#### However, after some investigation, we cannot reproduce the same result in the paper.
+
+
 # ForgER: Forgetful Expirience Replay for Reinforcement Learning from Demonstrations
 
 This repository is the TF2.0 implementation of Forgetful Replay Buffer for Reinforcement Learning from Demonstrations by [Alexey Skrynnik](https://github.com/Tviskaron), [Aleksey Staroverov](https://github.com/alstar8), [Ermek Aitygulov](https://github.com/ermekaitygulov), [Kirill Aksenov](https://github.com/axellkir), [Vasilii Davydov](https://github.com/dexfrost89), [Aleksandr I. Panov](https://github.com/grafft). 
