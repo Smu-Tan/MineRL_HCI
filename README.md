@@ -1,27 +1,25 @@
-#  **Can intelligent agents play Minecraft? Developing a hierarchical reinforcement learning agent to play Minecraft.**
- 
-**Note:**
-
-This study is a collaborative project between **Max Planck Institute (Germany)** and **Dr. Shihan Wang (Utrecht University)**. and it is under supervision of **Dr. Shihan Wang**.
-
-
-## **Weekly meeting report:**
-**The Weekly meeting report file includes all weekly meeting report.**. 
-
-
-## **Instruction of Forger baseline code**
-1. Preparations:
-    1. Request for resources: Open Jupyter Hub, request for short mode (at least 8 core CPU, 1 GPU, 16 memory, 1/2 hours)<br>
-    2. Load environment:<br>
-        open Terminal and run code:
-        `module load python/3.8`, `module load conda`, `conda activate MineRL` <br>
-    3. Prepare code: Upload forger-baseline.zip, then open the “Unzip.ipynb” notebook, run the code to unzip the file.
-    4. Install packages:<br>
-        open Terminal and run code:
-        `cd forger/forger-baseline/`, `pip install -r requirements.txt`<br><br>
-2. Run simple_set experiment:
-    1. In terminal run code: `python3 train_simple_set.py --config simple_set_config.yaml`
-    2. Hyper-parameter can be set in *config simple_set_config.yaml*
+#  **MineRL HCI assistant**
+![image](https://user-images.githubusercontent.com/79228128/140317038-be80fe22-aa5b-47c5-8b64-ea035c2cea71.png)
+#### 1. Subtask recommendation
+     a. Assigning subtask for human-player.
+     b. Subtask could be the chain in HDQfD or Markov-controller or hand-crafted chain.
+     c. Potential research: Comparing Human-player performance between different provided chains.
+#### 2. Action recommendation
+     a. Assigning action in the subtask for human-player.
+     b. For action, things might be a bit complex.
+     c. 10 basic actions: 
+        Move -- [forward, back, left, right]  
+        Camera -- [up, down, left, right] 
+        Combo -- [forward+jump] 
+        Attack 
+     d. Special actions:
+        Craft -- [Planke, stick, crafting_table, wooden_pickaxe, etc]: converting raw material
+        Place -- [item]: placing item(s)
+        NearbyCraft -- [item]: Craft item(s) when something nearby
+        Equip -- [item]
 
 
+## **Instruction of the program**
+1. Before you run the program, make sure you intsall python packages in the 'dependencies.txt'.
+2. You will find the instruction notebook in the 'HCI/HCI_module_notebook.ipynb'.
 
