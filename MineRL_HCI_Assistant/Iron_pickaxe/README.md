@@ -18,6 +18,7 @@
         NearbyCraft -- [item]: Craft item(s) when something nearby
         Equip -- [item]
 
+**Notes: No basic actions will be provided for the Iron_pickaxe Task**
 
 # **Instruction of the program**
 1. Before you run the program, make sure you intsall python packages in the 'dependencies.txt'.
