@@ -25,7 +25,7 @@
 
 # **Documentation**
 
-### **HCI_basic_agents**
+## **HCI_basic_agents**
 > **HCI_basic_agents Class provides basic action recommendation to human players.**
 
 |Function|Input|Output|Description
@@ -39,7 +39,7 @@
 -----
 <br/>
 
-### **HCI_controller**
+## **HCI_controller**
 > **HCI_controller Class provides subtask, special action, as well as basic action(if include_basic_actions = True) text  recommendation sentence(s) to human players.**
 
 
@@ -59,3 +59,11 @@
 |generate_utterance|suggest_subtask, suggest_sp_action, init_subtask(boolean)|recommendation template.|Function to generate recommendation template given suggest_subtask, suggest_sp_action and init_subtask(boolean).|
 |give_suggestion|inventory, obs (image of current state)|text recommendation sentence|Function to assign suggestion to human player given inventory infomation.<br>Notes: In this function, we will <br>1. first check whether the game has been finished yet: `Obtained the IronPickaxe`.<br>2. determine if the current subtask has finished: obtained certain number of item in a subtask.<br>3. provide subtask and special action(s) according to the `self.stage`.<br>4. If `include_basic_actions = True`, call `provide_basic_action` funtion to capture the text action recommendation that MineRL agent gave.|
 -----
+
+## **Data structure of the input to the give_suggestion function**
+|Name|<div style="width:500px">Data structure</div>|Description
+|----|-------|-----|
+|Inventory_data|Inventory_data: Python Dictionary<br><br><pre>Inventory_data = { “equipped_items.mainhand.type”: str,<br>                   “inventory”: <br>                          { “coal”: int,<br>                            “cobblestone”: int,<br>                            “crafting_table”: int,<br>                            “dirt”: int,<br>                            “furnace”: int,<br>                            “iron_axe”: int,<br>                            “iron_ingot”: int,<br>                            “iron_ore”: int,<br>                            “iron_pickaxe”: int,<br>                            “log”: int,<br>                            “planks”: int,<br>                            “stick”: int,<br>                            “stone”: int,<br>                            “stone_axe”: int,<br>                            “stone_pickaxe”: int,<br>                            “torch”: int,<br>                            “wooden_axe”: int,<br>                            “wooden_pickaxe”: int }<br>                  }|In general, Inventory_data contains the human player’s current inventory information and the mainhand equipped item type. <br><br>For example, the mainhand equipped item type could be any items in the inventory list(keys of inventory), such as coal, cobblestone, etc. To keep consistency, Items not in the inventory list can be considered as ‘others’. And no item in the mainhand will be ‘none’.<br><br>On the other hand, the inventory in the inventory_data is a python sub-dictionary containing 18 different item keys, and their values is python int.
+|Image_data|Image_data: Python Numpy array with shape: (64,64,3), dtype: uint8. e.g:<br><br><pre>img = array( [[[[[143, 181, 253],<br>                 [143, 181, 253],<br>                 [143, 181, 255],<br>                 ...,<br>                 [149, 182, 253],<br>                 [150, 183, 247],<br>                 [150, 183, 247]],<br>              ...<br>                 [ 70,  49,  34],<br>                 [ 76,  51,  32],<br>                 [108,  83,  64]]]]], dtype=uint8)|Image_data is the current POV image data of human players. It must be a numpy array, with shape: (64,64,3), dtype: unit8.<br><br>In order to test whether the image converted to the right numpy array: verify the shape of the image is (64,64,3) <br><br>you could use the code below to visualize the image, then see whether the original image is the visualized array.<br><br>**import matplotlib.pyplot as plt**<br><br>**plt.imshow(img, interpolation='nearest')**
+-----
+

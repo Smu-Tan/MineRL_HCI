@@ -24,22 +24,7 @@
 2. You will find the instruction notebook in the 'HCI/HCI_module_notebook.ipynb'.
 
 # **Documentation**
-
-### **HCI_basic_agents**
-> **HCI_basic_agents Class provides basic action recommendation to human players.**
-
-|Function|Input|Output|Description
-|----|-------|-------|---------------------|
-|init|None|A instance|Initialization of the class will do certain things once you create a new instance: <br>1. set hyper-perameters for agents, e.g: *replay buffer, obs_space, act_space*.<br> 2. load MineRL AI agents (forger) from the `./MineRL_HCI_Assistant/saved_agents/` folder.<br>|
-|load_config|None|MineRL agent config|Function to load agent configuration`(minerl_config.yaml file)`.|
-|load_agents|None|None|Function to load MineRL log and cobblestone agents under the `./saved_agents` folder.|
-|agent_infer_action|1.agent (*log or cobb agent*),<br>2.obs (*image of the current state*)|agent int action recommendation|Function to make corresponding MineRL agent to provide basic action recommendation. Notes: This function will call `ForgER.agent` to provide action, which based on tensorflow.|
-|action_to_recommendation|int_action|text action recommendation|Because the action that minerl agents infered is int data structure, we need to convert it to the corresponding text action recommendation. It will refer `self.key_to_dict` to convert the int action to the string action first, e.g: 0 -> 'forward'.<br> Notes: The function will call `self.template` to generate the text recommendation, therefore, if you want to modify the template, please modify `self.template` in the init part.|
-|recommend_action|None|MineRL agent config|Function to provide basic action to human player given obs (image) and task (log or cobblestone). The function will first infer int action considering what kind of task is given, then convert int action recommendation to readable text.|
------
-<br/>
-
-### **HCI_controller**
+## **HCI_controller**
 > **HCI_controller Class provides subtask, special action, as well as basic action(if include_basic_actions = True) text  recommendation sentence(s) to human players.**
 
 
@@ -58,4 +43,10 @@
 |provide_basic_action|obs(image of current state)|text action recommendation|Function to provide basic action text recommendation given obs(image).<br> Notes: 1. This function will only be called if `include_basic_actions = True`.<br> 2. It will call `recommend_action` funtion in **HCI_basic_agents** class to provide basic actions given the subtask is one of the ['log', 'cobblestone'].|
 |generate_utterance|suggest_subtask, suggest_sp_action, init_subtask(boolean)|recommendation template.|Function to generate recommendation template given suggest_subtask, suggest_sp_action and init_subtask(boolean).|
 |give_suggestion|inventory, obs (image of current state)|text recommendation sentence|Function to assign suggestion to human player given inventory infomation.<br>Notes: In this function, we will <br>1. first check whether the game has been finished yet: `Obtained the IronPickaxe`.<br>2. determine if the current subtask has finished: obtained certain number of item in a subtask.<br>3. provide subtask and special action(s) according to the `self.stage`.<br>4. If `include_basic_actions = True`, call `provide_basic_action` funtion to capture the text action recommendation that MineRL agent gave.|
+-----
+
+## **Data structure of the input to the give_suggestion function**
+|Name|<div style="width:500px">Data structure</div>|Description
+|----|-------|-----|
+|Inventory_data|Inventory_data: Python Dictionary<br><br><pre>Inventory_data = { “equipped_items.mainhand.type”: str,<br>                   “inventory”: <br>                          { “coal”: int,<br>                            “cobblestone”: int,<br>                            “crafting_table”: int,<br>                            “dirt”: int,<br>                            “furnace”: int,<br>                            “iron_axe”: int,<br>                            “iron_ingot”: int,<br>                            “iron_ore”: int,<br>                            “iron_pickaxe”: int,<br>                            “log”: int,<br>                            “planks”: int,<br>                            “stick”: int,<br>                            “stone”: int,<br>                            “stone_axe”: int,<br>                            “stone_pickaxe”: int,<br>                            “torch”: int,<br>                            “wooden_axe”: int,<br>                            “wooden_pickaxe”: int }<br>                  }|In general, Inventory_data contains the human player’s current inventory information and the mainhand equipped item type. <br><br>For example, the mainhand equipped item type could be any items in the inventory list(keys of inventory), such as coal, cobblestone, etc. To keep consistency, Items not in the inventory list can be considered as ‘others’. And no item in the mainhand will be ‘none’.<br><br>On the other hand, the inventory in the inventory_data is a python sub-dictionary containing 18 different item keys, and their values is python int.
 -----
