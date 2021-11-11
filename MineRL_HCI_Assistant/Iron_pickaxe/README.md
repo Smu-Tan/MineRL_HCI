@@ -31,7 +31,7 @@
 
 |Function|Input|Output|Description
 |----|-------|-------|---------------------|
-|init|include_basic_actions, basic_action_delay|A instance|Initialization of the class will do certain things once you create a new instance: <br>1. Load the chain, and initialze the subtask_nodes and special_actions lists according to the chain.<br> 2. set stage to 0 (stage will determine which stage we are on, and the HCI_controller will provide recommendation according to the `self.stage`)<br>3. if `include_basic_actions = True`, create an `HCI_basic_agents` instance and set delay ect.|
+|init|include_basic_actions, basic_action_delay|An instance|Initialization of the class will do certain things once you create a new instance: <br>1. Load the chain, and initialze the subtask_nodes and special_actions lists according to the chain.<br> 2. set stage to 0 (stage will determine which stage we are on, and the HCI_controller will provide recommendation according to the `self.stage`)<br>3. if `include_basic_actions = True`, create an `HCI_basic_agents` instance and set delay ect.|
 |load_chain|None|Loaded chain|Function to load MineRL chain under the `./HCI/`.|
 |create_nodes|chain|subtasks, special_actions|method to initialize the class: output subtasks,special_actions given a chain|
 |str_to_action_dict|str_action|python dict|convert string action to python dictionary.|
